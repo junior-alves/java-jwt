@@ -1,5 +1,6 @@
 package com.example.jwt.infra.http;
 
+import com.example.jwt.domain.AuthorizationService;
 import com.example.jwt.domain.User;
 import com.example.jwt.domain.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +22,16 @@ public class AuthController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private AuthorizationService authorizationService;
+
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody Map data) {
         var userpass = new UsernamePasswordAuthenticationToken(data.get("email"), data.get("pass"));
         var auth = authenticationManager.authenticate(userpass);
-        return ResponseEntity.ok().build();
+        var token = authorizationService.generateToken((User) auth.getPrincipal());
+
+        return ResponseEntity.ok(token);
     }
 
     @PostMapping("/register")
