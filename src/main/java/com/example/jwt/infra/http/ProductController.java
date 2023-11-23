@@ -20,7 +20,7 @@ public class ProductController {
 
     @PostMapping("create")
     public ResponseEntity create() {
-        //repository.save(new Product(1, "teste"));
+        repository.save(new Product(1, "teste"));
         return ResponseEntity.ok().build();
     }
 
