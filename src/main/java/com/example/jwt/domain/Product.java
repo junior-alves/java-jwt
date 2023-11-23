@@ -3,14 +3,14 @@ package com.example.jwt.domain;
 
 import lombok.Getter;
 
-import java.io.Serializable;
+import java.util.UUID;
 
 @Getter
 public class Product {
-    private final int id;
+    private final UUID id;
     private final String name;
 
-    public Product(int id, String name) {
+    public Product(UUID id, String name) {
         this.id = id;
         this.name = name;
     }
