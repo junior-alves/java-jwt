@@ -17,7 +17,9 @@ public class ProductController {
 
     @PostMapping("create")
     public ResponseEntity create() {
-        repository.save(new Product(UUID.randomUUID(), "teste"));
+        for (var i =0; i < 100000; i++) {
+            repository.save(new Product(UUID.randomUUID(), String.format("Product %s", i)));
+        }
         return ResponseEntity.ok().build();
     }
 

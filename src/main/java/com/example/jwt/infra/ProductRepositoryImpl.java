@@ -11,7 +11,7 @@ public class ProductRepositoryImpl implements ProductRepository {
 
     private static int SIZE = 10;
     
-    private final Hashtable<Integer, LinkedList<Product>> _table = new Hashtable<>(10);
+    private final Hashtable<Integer, LinkedList<Product>> _table = new Hashtable<>(SIZE);
 
     @Override
     public void save(Product p) {
@@ -33,7 +33,7 @@ public class ProductRepositoryImpl implements ProductRepository {
 
         if(list == null) return null;
 
-        return list.stream().filter(product -> id.equals(product.getId().toString())).toList().get(0);
+        return list.stream().filter(product -> id.equals(product.getId().toString())).findFirst().get();
     }
 
     private static int getIndex(String id) {
